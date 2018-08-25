@@ -43,3 +43,15 @@ Remove dangling images:
 ```
 docker rmi $(docker images -q -f dangling=true)
 ```
+
+# Run cli application
+
+```
+php composer.phar start
+```
+
+# Test application
+
+```
+php composer.phar test
+```
