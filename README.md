@@ -27,7 +27,7 @@ docker-compose up -d
 Running composer
 
 ```
-docker container -it slim_app composer install 
+docker container exec -it slim_app composer install 
 ```
 
 Testing Elasticsearch access:
