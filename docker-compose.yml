@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+
+  # MySql Database
+  slim_mysql:
+    context: .
+    dockerfile: Dockerfile_Mysql
+    image: slim_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    restart: always
+    networks:
+      - slim_network
+
+  # ElasticSearch server
+  slim_elasticsearch:
+    context: .
+    dockerfile: Dockerfile_Elasticsearch
+    image: slim_elasticsearch
+    networks:
+      - slim_network
+
+  # Apache + PHP7 server
+  slim_app:
+    context: .
+    dockerfile: Dockerfile_App
+    image: slim_app
+    networks:
+      - slim_network
+
+networks:
+  slim_network
