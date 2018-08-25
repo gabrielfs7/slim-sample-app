@@ -20,12 +20,23 @@ class HomepageTest extends BaseTestCase
     /**
      * Test that the index route with optional name argument returns a rendered greeting
      */
-    public function testGetHomepageWithGreeting() : void
+    public function testGetHelloPageWithGreeting() : void
     {
-        $response = $this->runApp('GET', '/name');
+        $response = $this->runApp('GET', '/hello/Gabriel');
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertContains('Hello name!', (string)$response->getBody());
+        $this->assertContains('Hello Gabriel!', (string)$response->getBody());
+    }
+
+    /**
+     * Test that the render simple foo test page
+     */
+    public function testGetFooPage() : void
+    {
+        $response = $this->runApp('GET', '/foo');
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertContains('bar', (string)$response->getBody());
     }
 
     /**
