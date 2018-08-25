@@ -1,4 +1,1 @@
 FROM php:7.3-rc-apache-stretch
-
-# Bind mount the volume to current directory
-VOLUME ./:/var/www/html

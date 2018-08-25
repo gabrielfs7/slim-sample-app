@@ -1,11 +1,13 @@
-version: '3.7'
+version: '3.6'
 
 services:
 
   # MySql Database
   slim_mysql:
-    context: .
-    dockerfile: Dockerfile_Mysql
+    container_name: slim_mysql
+    build:
+      context: .
+      dockerfile: Dockerfile_Mysql
     image: slim_mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -15,19 +17,30 @@ services:
 
   # ElasticSearch server
   slim_elasticsearch:
-    context: .
-    dockerfile: Dockerfile_Elasticsearch
+    container_name: slim_elasticsearch
+    build:
+      context: .
+      dockerfile: Dockerfile_Elasticsearch
     image: slim_elasticsearch
     networks:
       - slim_network
 
   # Apache + PHP7 server
   slim_app:
-    context: .
-    dockerfile: Dockerfile_App
+    container_name: slim_app
+    build:
+      context: .
+      dockerfile: Dockerfile_App
     image: slim_app
+    ports:
+      - '80:80'
     networks:
       - slim_network
 
+    # Bind mount the volume, so changes made in this directory will be recognized by the container
+    volumes:
+      - ./:/var/www/html/
+
 networks:
-  slim_network
+  slim_network:
+    name: slim_network
