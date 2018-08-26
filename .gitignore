@@ -3,3 +3,4 @@ composer.phar
 /vendor/
 /logs/*
 swagger-ui
+swagger-codegen
