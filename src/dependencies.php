@@ -1,4 +1,5 @@
 <?php
+
 use \Psr\Container\ContainerInterface;
 
 /** @var ContainerInterface $container */
@@ -19,3 +20,5 @@ $container['logger'] = function (ContainerInterface $container) {
 
     return $logger;
 };
+
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'actions.php';

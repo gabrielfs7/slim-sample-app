@@ -1,31 +1,5 @@
 <?php
 
-use Slim\Http\Request;
-use Slim\Http\Response;
-
-$app->get(
-    '/',
-    function (Request $request, Response $response, array $args) {
-        $this->logger->info("Slim-Skeleton '/' route");
-
-        return $this->renderer->render($response, 'index.phtml', $args);
-    }
-);
-
-$app->get(
-    '/hello/[{name}]',
-    function (Request $request, Response $response, array $args) {
-        $this->logger->info("Slim-Skeleton '/' route");
-
-        return $this->renderer->render($response, 'index.phtml', $args);
-    }
-);
-
-$app->get(
-    '/foo',
-    function (Request $request, Response $response, array $args) {
-        $this->logger->info("Slim-Skeleton '/hello' route");
-
-        return $response->write('bar');
-    }
-);
+$app->get('/', $app->getContainer()->get('action.home'));
+$app->get('/hello/[{name}]', $app->getContainer()->get('action.hello'));
+$app->get('/foo', $app->getContainer()->get('action.foo'));
