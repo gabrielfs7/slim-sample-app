@@ -23,8 +23,6 @@ class HelloAction implements Invocable
 
     public function __invoke(RequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        phpinfo(); //FIXME
-
         $this->logger->info("Slim-Skeleton '/' route");
 
         return $this->phpRenderer->render($response, 'index.phtml', $args);

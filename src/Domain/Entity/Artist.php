@@ -2,7 +2,6 @@
 
 namespace SlimSampleApp\Domain\Entity;
 
-
 class Artist
 {
     /** @var int */

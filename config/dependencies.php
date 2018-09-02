@@ -1,13 +1,14 @@
 <?php
 
-use Doctrine\Common\Persistence\Mapping\Driver\DefaultFileLocator;
-use Doctrine\ORM\Mapping\Driver\YamlDriver;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Monolog\Logger;
 use Psr\Container\ContainerInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\ORM\Tools\Setup;
 use Slim\Views\PhpRenderer;
+use SlimSampleApp\Domain\Entity\Artist;
+use SlimSampleApp\Domain\Repository\ArtistRepository;
 
 /** @var ContainerInterface $container */
 $container = $app->getContainer();
@@ -41,6 +42,13 @@ $container[EntityManager::class] = function (ContainerInterface $container): Ent
     return EntityManager::create(
         $container['settings']['doctrine']['connection'],
         $config
+    );
+};
+
+$container[ArtistRepository::class] = function (ContainerInterface $container): ArtistRepository {
+    return new ArtistRepository(
+        $container[EntityManager::class],
+        new ClassMetadata(Artist::class)
     );
 };
 
