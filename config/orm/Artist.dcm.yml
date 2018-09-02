@@ -1,0 +1,36 @@
+SlimSampleApp\Domain\Entity\Artist:
+  type: entity
+  repositoryClass: SlimSampleApp\Domain\Repository\ArtistRepository
+  table: artist
+  indexes:
+    username_index:
+      columns: [ username ]
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 50
+      column: genre
+      nullable: false
+      unique: true
+    genre:
+      type: string
+      length: 50
+      column: genre
+      nullable: false
+    albumsRecorded:
+      type: integer
+      column: albums_recorded
+      nullable: false
+      options:
+        unsigned: true
+        default: 0
+    username:
+      type: string
+      length: 20
+      column: username
+      nullable: false

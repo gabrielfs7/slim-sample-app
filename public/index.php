@@ -12,3 +12,5 @@ if (PHP_SAPI == 'cli-server') {
 }
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
+
+$app->run(); // Run app

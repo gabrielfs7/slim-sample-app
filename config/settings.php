@@ -2,7 +2,7 @@
 
 use Monolog\Logger;
 
-define('APP_ROOT', __DIR__);
+define('APP_ROOT', __DIR__ . '/../');
 
 return [
     'settings' => [
@@ -31,7 +31,10 @@ return [
             'cache_dir' => APP_ROOT . '/var/doctrine',
 
             // you should add any other path containing annotated entity classes
-            'metadata_dirs' => [APP_ROOT . '/src/Domain/Entity'],
+            'metadata_dirs' => [APP_ROOT . '/config/orm'],
+
+            // Entities dir
+            'entity_dirs' => [APP_ROOT . '/src/Domain/Entity'],
 
             'connection' => [
                 'driver' => 'pdo_mysql',

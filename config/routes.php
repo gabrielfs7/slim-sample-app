@@ -1,5 +1,9 @@
 <?php
 
-$app->get('/', $app->getContainer()->get('action.home'));
-$app->get('/hello/[{name}]', $app->getContainer()->get('action.hello'));
-$app->get('/foo', $app->getContainer()->get('action.foo'));
+use SlimSampleApp\Action\FooAction;
+use SlimSampleApp\Action\HelloAction;
+use SlimSampleApp\Action\HomeAction;
+
+$app->get('/', $app->getContainer()->get(HomeAction::class));
+$app->get('/hello/[{name}]', $app->getContainer()->get(HelloAction::class));
+$app->get('/foo', $app->getContainer()->get(FooAction::class));

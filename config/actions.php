@@ -1,6 +1,8 @@
 <?php
 
+use Monolog\Logger;
 use \Psr\Container\ContainerInterface;
+use Slim\Views\PhpRenderer;
 use SlimSampleApp\Action\FooAction;
 use SlimSampleApp\Action\HelloAction;
 use SlimSampleApp\Action\HomeAction;
@@ -8,14 +10,14 @@ use SlimSampleApp\Action\HomeAction;
 /** @var ContainerInterface $container */
 $container = $app->getContainer();
 
-$container['action.home'] = function (ContainerInterface $container) {
-    return new HomeAction($container['renderer'], $container['logger']);
+$container[HomeAction::class] = function (ContainerInterface $container) {
+    return new HomeAction($container[PhpRenderer::class], $container[Logger::class]);
 };
 
-$container['action.hello'] = function (ContainerInterface $container) {
-    return new HelloAction($container['renderer'], $container['logger']);
+$container[HelloAction::class] = function (ContainerInterface $container) {
+    return new HelloAction($container[PhpRenderer::class], $container[Logger::class]);
 };
 
-$container['action.foo'] = function (ContainerInterface $container) {
+$container[FooAction::class] = function (ContainerInterface $container) {
     return new FooAction();
 };
