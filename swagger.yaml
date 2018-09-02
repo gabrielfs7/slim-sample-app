@@ -40,6 +40,11 @@ paths:
       responses:
         '200':
           description: Successfully created a new artist
+          content:
+            application/json:
+               schema:
+                 $ref: '#/components/schemas/Artist'
+
         '400':
           $ref: '#/components/responses/400Error'
 
@@ -59,14 +64,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  artist_name:
-                    type: string
-                  artist_genre:
-                    type: string
-                  albums_recorded:
-                    type: integer
+                $ref: '#/components/schemas/Artist'
 
         '400':
           $ref: '#/components/responses/400Error'

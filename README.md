@@ -47,39 +47,6 @@ Run composer
 docker container exec -it slim_app composer install 
 ```
 
-## Set up Swagger Codegen with Docker
-
-In your `host machine`:
-
-```
-git clone https://github.com/swagger-api/swagger-codegen
-cd swagger-codegen
-./run-in-docker.sh mvn package
-```
-
-Now you can use `./run-in-docker.sh` as your **swagger-codegen-cli** to
-generate HTML documentation for your OpenAPI 3.0 specification. Example:
- 
-Executes 'help' command for swagger-codegen-cli:
-```
-./run-in-docker.sh help
-```
-
-Executes 'langs' command for swagger-codegen-cli
-```
-./run-in-docker.sh langs
-```
-
-Builds the Go client:
-```
-./run-in-docker.sh /gen/bin/go-petstore.sh
-```
-
-Generates go client, outputs locally to ./out/go-petstore
-```
-./run-in-docker.sh generate -i ../swagger.yaml -l go -o /gen/out/slim_app -DpackageName=slim_app
-```
-
 # Helpful commands
 
 Testing Elasticsearch access:
