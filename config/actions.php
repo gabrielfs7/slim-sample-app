@@ -5,6 +5,9 @@ use SlimSampleApp\Action\FooAction;
 use SlimSampleApp\Action\HelloAction;
 use SlimSampleApp\Action\HomeAction;
 
+/** @var ContainerInterface $container */
+$container = $app->getContainer();
+
 $container['action.home'] = function (ContainerInterface $container) {
     return new HomeAction($container['renderer'], $container['logger']);
 };

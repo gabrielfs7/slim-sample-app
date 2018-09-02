@@ -21,4 +21,4 @@ $container['logger'] = function (ContainerInterface $container) {
     return $logger;
 };
 
-require_once __DIR__ . DIRECTORY_SEPARATOR . 'actions.php';
+require __DIR__ . DIRECTORY_SEPARATOR . 'actions.php';

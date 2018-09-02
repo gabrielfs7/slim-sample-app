@@ -30,25 +30,15 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
     {
         $request = $this->createRequest($requestMethod, $requestUri, $requestData);
 
-        $app = $this->createApp();
+        $settings = require __DIR__ . '/../../config/settings.php'; // Instantiate the app
+
+        $app = new \Slim\App($settings);
+
+        require __DIR__ . '/../../config/dependencies.php'; // Set up dependencies
+        require __DIR__ . '/../../config/middleware.php'; // Register middleware
+        require __DIR__ . '/../../config/routes.php'; // Register routes
 
         return $app->process($request, new Response());
-    }
-
-    /**
-     * @return App
-     */
-    private function createApp() : App
-    {
-        $settings = require __DIR__ . '/../../src/settings.php';
-
-        $app = new App($settings);
-
-        require __DIR__ . '/../../src/dependencies.php';
-        require __DIR__ . '/../../src/middleware.php';
-        require __DIR__ . '/../../src/routes.php';
-
-        return $app;
     }
 
     /**
