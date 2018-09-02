@@ -30,17 +30,9 @@ $container[Logger::class] = function (ContainerInterface $container) {
 
 $container[EntityManager::class] = function (ContainerInterface $container): EntityManager {
     $config = Setup::createYAMLMetadataConfiguration(
-        $container['settings']['doctrine']['entity_dirs'],
-        $container['settings']['doctrine']['dev_mode']
-    );
-
-    $config->setMetadataDriverImpl(
-        new YamlDriver(
-            new DefaultFileLocator($container['settings']['doctrine']['metadata_dirs'])
-        )
-    );
-
-    $config->setMetadataCacheImpl(
+        $container['settings']['doctrine']['metadata_dirs'],
+        $container['settings']['doctrine']['dev_mode'],
+        null,
         new FilesystemCache(
             $container['settings']['doctrine']['cache_dir']
         )

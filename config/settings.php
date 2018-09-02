@@ -2,7 +2,7 @@
 
 use Monolog\Logger;
 
-define('APP_ROOT', __DIR__ . '/../');
+define('APP_ROOT', realpath(__DIR__ . '/../'));
 
 return [
     'settings' => [
@@ -12,7 +12,7 @@ return [
 
         // Renderer settings
         'renderer' => [
-            'template_path' => __DIR__ . '/../templates/',
+            'template_path' => APP_ROOT . '/templates/',
         ],
 
         // Monolog settings
@@ -43,7 +43,7 @@ return [
                 'dbname' => 'slim_app',
                 'user' => 'root',
                 'password' => 'root',
-                'charset' => 'utf-8'
+                'charset' => 'utf8'
             ]
         ]
     ],

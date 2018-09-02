@@ -14,7 +14,7 @@ SlimSampleApp\Domain\Entity\Artist:
     name:
       type: string
       length: 50
-      column: genre
+      column: name
       nullable: false
       unique: true
     genre:
