@@ -21,11 +21,9 @@ class CreateArtistAction implements Invocable
 
     public function __invoke(RequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-
-        var_dump($this->artistRepository->findAll()); //FIXME
+        $this->artistRepository->findAll(); //FIXME
 
         $request->getBody()->getMetadata();
-
 
         exit('dasdsadsa');
     }

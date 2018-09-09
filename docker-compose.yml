@@ -7,7 +7,7 @@ services:
     container_name: slim_mysql
     build:
       context: .
-      dockerfile: Dockerfile_Mysql
+      dockerfile: docker/mysql/Dockerfile
     image: slim_mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -20,7 +20,7 @@ services:
     container_name: slim_elasticsearch
     build:
       context: .
-      dockerfile: Dockerfile_Elasticsearch
+      dockerfile: docker/elasticsearch/Dockerfile
     image: slim_elasticsearch
     networks:
       - slim_network
@@ -30,7 +30,7 @@ services:
     container_name: slim_app
     build:
       context: .
-      dockerfile: Dockerfile_App
+      dockerfile: docker/php/Dockerfile
     image: slim_app
     ports:
       - '80:80'

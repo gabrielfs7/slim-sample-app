@@ -69,6 +69,12 @@ Inside `slim_app` container:
 php composer.phar start
 ```
 
+to create DB schema:
+
+```
+php cli-config.php orm:schema-tool:create
+```
+
 # Test application
 
 ```
