@@ -1,14 +1,17 @@
 <?php
 
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Monolog\Logger;
 use Psr\Container\ContainerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\ORM\Tools\Setup;
 use Slim\Views\PhpRenderer;
 use SlimSampleApp\Domain\Entity\Artist;
 use SlimSampleApp\Domain\Repository\ArtistRepository;
+use SlimSampleApp\Normalizer\Artist\ArtistNormalizer;
+use SlimSampleApp\Service\Artist\ArtistCreator;
+use SlimSampleApp\Service\Artist\ArtistUpdater;
 
 /** @var ContainerInterface $container */
 $container = $app->getContainer();
@@ -50,6 +53,18 @@ $container[ArtistRepository::class] = function (ContainerInterface $container): 
         $container[EntityManager::class],
         new ClassMetadata(Artist::class)
     );
+};
+
+$container[ArtistCreator::class] = function (ContainerInterface $container): ArtistCreator {
+    return new ArtistCreator($container[ArtistRepository::class]);
+};
+
+$container[ArtistUpdater::class] = function (ContainerInterface $container): ArtistUpdater {
+    return new ArtistUpdater($container[ArtistRepository::class]);
+};
+
+$container[ArtistNormalizer::class] = function (ContainerInterface $container): ArtistNormalizer {
+    return new ArtistNormalizer();
 };
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'actions.php';

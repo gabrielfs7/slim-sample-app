@@ -4,9 +4,13 @@ use SlimSampleApp\Action\FooAction;
 use SlimSampleApp\Action\HelloAction;
 use SlimSampleApp\Action\HomeAction;
 use SlimSampleApp\Action\Artist\CreateArtistAction;
+use SlimSampleApp\Action\Artist\UpdateArtistAction;
 
-$app->get('/', $app->getContainer()->get(HomeAction::class));
-$app->get('/hello/[{name}]', $app->getContainer()->get(HelloAction::class));
-$app->get('/foo', $app->getContainer()->get(FooAction::class));
+$container = $app->getContainer();
 
-$app->get('/artists', $app->getContainer()->get(CreateArtistAction::class));
+$app->get('/', $container[HomeAction::class]);
+$app->get('/hello/[{name}]', $container[HelloAction::class]);
+$app->get('/foo', $container[FooAction::class]);
+
+$app->post('/artists', $container[CreateArtistAction::class]);
+$app->patch('/artists/{artistId}', $container[UpdateArtistAction::class]);

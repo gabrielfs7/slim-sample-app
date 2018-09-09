@@ -7,25 +7,25 @@ use Psr\Http\Message\ResponseInterface;
 use SlimSampleApp\Action\AbstractAction;
 use SlimSampleApp\Normalizer\Artist\ArtistNormalizer;
 use SlimSampleApp\Normalizer\NormalizableInterface;
-use SlimSampleApp\Service\Artist\ArtistCreator;
+use SlimSampleApp\Service\Artist\ArtistUpdater;
 
-class CreateArtistAction extends AbstractAction
+class UpdateArtistAction extends AbstractAction
 {
     /** @var ArtistNormalizer */
     private $artistNormalizer;
 
-    /** @var ArtistCreator */
-    private $artistCreator;
+    /** @var ArtistUpdater */
+    private $artistUpdater;
 
-    public function __construct(ArtistCreator $artistCreator, ArtistNormalizer $artistNormalizer)
+    public function __construct(ArtistUpdater $artistUpdater, ArtistNormalizer $artistNormalizer)
     {
         $this->artistNormalizer = $artistNormalizer;
-        $this->artistCreator = $artistCreator;
+        $this->artistUpdater = $artistUpdater;
     }
 
     public function __invoke(RequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-        $artist = $this->artistCreator->create($this->getJsonDecodedRequest($request));
+        $artist = $this->artistUpdater->update($this->getJsonDecodedRequest($request), $args['artistId']);
 
         return $this->createJsonResponse($response, $artist);
     }

@@ -2,7 +2,7 @@
 
 namespace SlimSampleApp\Domain\Entity;
 
-class Artist
+class Artist implements EntityInterface
 {
     /** @var int */
     private $id;
@@ -27,43 +27,43 @@ class Artist
         $this->username = $username;
     }
 
-    public function getId() : int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function setName(string $name) : self
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getName() : self
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setGenre(string $genre) : self
+    public function setGenre(string $genre): self
     {
         $this->genre = $genre;
 
         return $this;
     }
 
-    public function getGenre() : self
+    public function getGenre(): string
     {
         return $this->genre;
     }
 
-    public function setAlbumsRecorded(int $albumsRecorded) : self
+    public function setAlbumsRecorded(int $albumsRecorded): self
     {
         $this->albumsRecorded = $albumsRecorded;
 
         return $this;
     }
 
-    public function getAlbumsRecorded() : int
+    public function getAlbumsRecorded(): int
     {
         return $this->albumsRecorded;
     }
@@ -75,7 +75,7 @@ class Artist
         return $this;
     }
 
-    public function getUsername() : self
+    public function getUsername(): string
     {
         return $this->username;
     }
