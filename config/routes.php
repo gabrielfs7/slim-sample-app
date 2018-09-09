@@ -1,5 +1,6 @@
 <?php
 
+use SlimSampleApp\Action\Artist\GetArtistAction;
 use SlimSampleApp\Action\FooAction;
 use SlimSampleApp\Action\HelloAction;
 use SlimSampleApp\Action\HomeAction;
@@ -14,3 +15,4 @@ $app->get('/foo', $container[FooAction::class]);
 
 $app->post('/artists', $container[CreateArtistAction::class]);
 $app->patch('/artists/{artistId}', $container[UpdateArtistAction::class]);
+$app->get('/artists/{artistId}', $container[GetArtistAction::class]);
