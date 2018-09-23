@@ -10,6 +10,7 @@ use SlimSampleApp\Action\HelloAction;
 use SlimSampleApp\Action\HomeAction;
 use SlimSampleApp\Action\Artist\CreateArtistAction;
 use SlimSampleApp\Domain\Repository\ArtistRepository;
+use SlimSampleApp\Http\ResponseBuilder;
 use SlimSampleApp\Normalizer\Artist\ArtistNormalizer;
 use SlimSampleApp\Service\Artist\ArtistCreator;
 use SlimSampleApp\Service\Artist\ArtistUpdater;
@@ -30,22 +31,22 @@ $container[FooAction::class] = function (ContainerInterface $container) {
 };
 
 $container[CreateArtistAction::class] = function (ContainerInterface $container) {
-    return new CreateArtistAction(
-        $container[ArtistCreator::class],
-        $container[ArtistNormalizer::class]
-    );
+    $action = new CreateArtistAction($container[ArtistCreator::class]);
+    $action->setResponseBuilder($container->get(ResponseBuilder::class));
+
+    return $action;
 };
 
 $container[UpdateArtistAction::class] = function (ContainerInterface $container) {
-    return new UpdateArtistAction(
-        $container[ArtistUpdater::class],
-        $container[ArtistNormalizer::class]
-    );
+    $action = new UpdateArtistAction($container[ArtistUpdater::class]);
+    $action->setResponseBuilder($container->get(ResponseBuilder::class));
+
+    return $action;
 };
 
 $container[GetArtistAction::class] = function (ContainerInterface $container) {
-    return new GetArtistAction(
-        $container[ArtistRepository::class],
-        $container[ArtistNormalizer::class]
-    );
+    $action = new GetArtistAction($container[ArtistRepository::class]);
+    $action->setResponseBuilder($container->get(ResponseBuilder::class));
+
+    return $action;
 };

@@ -9,6 +9,8 @@ use Doctrine\ORM\Tools\Setup;
 use Slim\Views\PhpRenderer;
 use SlimSampleApp\Domain\Entity\Artist;
 use SlimSampleApp\Domain\Repository\ArtistRepository;
+use SlimSampleApp\Http\ResponseBuilder;
+use SlimSampleApp\Middleware\NormalizerMiddleware;
 use SlimSampleApp\Normalizer\Artist\ArtistNormalizer;
 use SlimSampleApp\Service\Artist\ArtistCreator;
 use SlimSampleApp\Service\Artist\ArtistUpdater;
@@ -65,6 +67,13 @@ $container[ArtistUpdater::class] = function (ContainerInterface $container): Art
 
 $container[ArtistNormalizer::class] = function (ContainerInterface $container): ArtistNormalizer {
     return new ArtistNormalizer();
+};
+
+$container[ResponseBuilder::class] = function (ContainerInterface $container): ResponseBuilder {
+    $middleware = new ResponseBuilder();
+    $middleware->registerNormalize($container->get(ArtistNormalizer::class));
+
+    return $middleware;
 };
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'actions.php';

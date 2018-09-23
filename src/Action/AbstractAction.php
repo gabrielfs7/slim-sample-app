@@ -2,24 +2,41 @@
 
 namespace SlimSampleApp\Action;
 
+use ErrorException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use SlimSampleApp\Normalizer\NormalizableInterface;
+use SlimSampleApp\Http\ResponseBuilder;
 
 abstract class AbstractAction implements Invocable
 {
-    abstract protected function getNormalizer(): NormalizableInterface;
+    /** @var  ResponseBuilder */
+    private $responseBuilder;
+
+    public function __invoke(RequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        return $this->getResponseBuilder()->build($response, $this->processRequest($request, $args));
+    }
+
+    public function setResponseBuilder(ResponseBuilder $responseBuilder): self
+    {
+        $this->responseBuilder = $responseBuilder;
+
+        return $this;
+    }
 
     protected function getJsonDecodedRequest(RequestInterface $request): array
     {
         return json_decode($request->getBody()->getContents(), true);
     }
 
-    protected function createJsonResponse(ResponseInterface $response, $responseContent) : ResponseInterface
-    {
-        $response = $response->withHeader('Content-type', 'application/json');
-        $response->getBody()->write(json_encode($this->getNormalizer()->normalize($responseContent)));
+    abstract protected function processRequest(RequestInterface $request, array $args);
 
-        return $response;
+    private function getResponseBuilder(): ResponseBuilder
+    {
+        if ($this->responseBuilder) {
+            return $this->responseBuilder;
+        }
+
+        throw new ErrorException(sprintf('It is necessary to set %s', ResponseBuilder::class));
     }
 }
