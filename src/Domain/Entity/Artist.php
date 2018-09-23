@@ -14,7 +14,7 @@ class Artist implements EntityInterface
     private $genre;
 
     /** @var int */
-    private $albumsRecorded = 0;
+    private $albumsRecorded;
 
     /** @var string */
     private $username;

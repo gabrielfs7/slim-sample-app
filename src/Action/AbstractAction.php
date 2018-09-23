@@ -8,7 +8,6 @@ use SlimSampleApp\Normalizer\NormalizableInterface;
 
 abstract class AbstractAction implements Invocable
 {
-
     abstract protected function getNormalizer(): NormalizableInterface;
 
     protected function getJsonDecodedRequest(RequestInterface $request): array
